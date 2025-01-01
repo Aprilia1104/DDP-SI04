@@ -9,29 +9,29 @@ st.markdown(
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
     body {
-        background-color: #b3d9ff; /* Warna latar belakang biru muda */
-        color: rgb(20, 40, 60); /* Warna teks tetap sesuai */
-        font-family: 'Poppins', Helvetica, Arial, sans-serif; /* Font baru: Poppins */
+        background-color: #b3d9ff; 
+        color: rgb(20, 40, 60); 
+        font-family: 'Poppins', Helvetica, Arial, sans-serif;
         font-size: 1.2em;
     }
     a {
-        color: rgb(255, 111, 111); /* Warna tautan merah muda terang */
+        color: rgb(255, 111, 111); 
     }
     .sidebar .sidebar-content {
         background-color: #70a1ff;
-        font-family: 'Poppins', Helvetica, Arial, sans-serif; /* Font sidebar */
+        font-family: 'Poppins', Helvetica, Arial, sans-serif;
     }
     h1, h2, h3 {
-        color: maroon; /* Set all titles to maroon */
+        color: maroon;
         text-align: center;
-        font-family: 'Poppins', Helvetica, Arial, sans-serif; /* Font baru untuk judul */
-        font-weight: 600; /* Menebalkan font judul */
+        font-family: 'Poppins', Helvetica, Arial, sans-serif; 
+        font-weight: 600;
     }
     .st-button button {
         background-color: #1e90ff;
         color: white;
         border-radius: 5px;
-        font-family: 'Poppins', Helvetica, Arial, sans-serif; /* Font untuk tombol */
+        font-family: 'Poppins', Helvetica, Arial, sans-serif; 
     }
     .st-button button:hover {
         background-color: #4682b4;
@@ -42,7 +42,7 @@ st.markdown(
         border-collapse: collapse;
         width: 80%;
         background-color: #f0f8ff;
-        font-family: 'Poppins', Helvetica, Arial, sans-serif; /* Font tabel */
+        font-family: 'Poppins', Helvetica, Arial, sans-serif; 
     }
     .dataframe th {
         background-color: #4682b4;
@@ -67,6 +67,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+icon_image =("food.png")  # Pastikan file gambar ada di direktori proyek
+st.sidebar.image(icon_image, use_container_width=True, caption="Rumah Makan Keluarga")
+
 # data untuk menu minuman
 data_minuman = {
     "Nama Minuman": ["Es Teh", "Es Jeruk", "Cappuccino", "Latte", "Matcha", "Thai Tea", "Lemon Tea", "Lychee Tea", "Milkshake", "Es Krim"],
@@ -83,7 +86,7 @@ menu_makanan_df = pd.DataFrame(data_makanan)
 
 # fungsi untuk menu utama
 def menu_utama():
-    st.title("Rumah Makan Keluarga")
+    st.title("🍴Rumah Makan Keluarga🍴")
     st.image("logo.jpeg", width=700, caption="Selamat Datang di Rumah Makan Keluarga")
     st.write("""
     ### Tentang Kami
@@ -96,13 +99,13 @@ def menu_utama():
 
 # fungsi untuk menu minuman
 def menu_minuman():
-    st.title("Menu Minuman")
+    st.title("🍹Menu Minuman🍹")
     st.write("### Pilih Menu Minuman")
     st.dataframe(menu_minuman_df)  # nampilin menu minuman dalam bentuk tabel
     
     # pilihan buat menu minuman dan jumlah
-    pilihan_minuman = st.selectbox("Pilih Minuman", menu_minuman_df["Nama Minuman"])
-    jumlah_minuman = st.number_input("Jumlah Pesanan", min_value=1, step=1)
+    pilihan_minuman = st.selectbox("🥤Pilih Minuman", menu_minuman_df["Nama Minuman"])
+    jumlah_minuman = st.number_input("🔢Jumlah Pesanan", min_value=1, step=1)
     harga_minuman = menu_minuman_df[menu_minuman_df["Nama Minuman"] == pilihan_minuman]["Harga (Rp)"].values[0]
     total_harga = harga_minuman * jumlah_minuman
     st.write(f"Total harga yang akan anda bayar untuk {jumlah_minuman} {pilihan_minuman} adalah Rp {total_harga}")
@@ -127,10 +130,10 @@ def buat_pdf(data):
 
 # fungsi untuk pemesanan minuman
 def pemesanan_minuman():
-    st.title("Pemesanan Minuman")
+    st.title("🛒Pemesanan Minuman🛒P")
 
-    nama_pembeli = st.text_input("Nama Pembeli")
-    no_telepon = st.text_input("Nomor Telepon")
+    nama_pembeli = st.text_input("🧑 Nama Pembeli")
+    no_telepon = st.text_input("📞 Nomor Telepon")
 
     pesanan_minuman = []
 
@@ -138,8 +141,8 @@ def pemesanan_minuman():
         st.session_state.pesanan_minuman = []
 
     st.write("### Pilih Menu Minuman")
-    pilihan_minuman = st.multiselect("Pilih Minuman", menu_minuman_df["Nama Minuman"].tolist())
-    jumlah_minuman = st.number_input("Jumlah Pesanan", min_value=1, step=1)
+    pilihan_minuman = st.multiselect("🥤 Pilih Minuman", menu_minuman_df["Nama Minuman"].tolist())
+    jumlah_minuman = st.number_input("🔢 Jumlah Pesanan", min_value=1, step=1)
 
     if st.button("Tambahkan ke Pesanan"):
         if not nama_pembeli or not no_telepon or not pilihan_minuman:
@@ -155,7 +158,9 @@ def pemesanan_minuman():
                     "Harga Satuan": harga_minuman,
                     "Total": jumlah_minuman * harga_minuman
                 })
-            st.success("Pesanan berhasil ditambahkan!")
+            st.success(f"🎉 Terima kasih! Pesanan Anda telah kami terima.")
+            st.write("### 📜 Daftar Pesanan Anda")
+            
 
     st.write(" Daftar Pesanan Minuman")
     if st.session_state.pesanan_minuman:
@@ -188,30 +193,30 @@ def pemesanan_minuman():
 
 # fungsi buat menu makanan
 def menu_makanan():
-    st.title("Menu Makanan")
+    st.title("🍲Menu Makanan🍲")
     st.write("### Pilih Menu Makanan")
     st.dataframe(menu_makanan_df)  # nampilin menu makanan dalam bentuk tabel
     
     # pilihan menu makanan dan jumlah
-    pilihan_makanan = st.selectbox("Pilih Makanan", menu_makanan_df["Nama Makanan"])
-    jumlah_makanan = st.number_input("Jumlah Pesanan", min_value=1, step=1)
+    pilihan_makanan = st.selectbox("🍽️ Pilih Makanan", menu_makanan_df["Nama Makanan"])
+    jumlah_makanan = st.number_input("🔢 Jumlah Pesanan", min_value=1, step=1)
     harga_makanan = menu_makanan_df[menu_makanan_df["Nama Makanan"] == pilihan_makanan]["Harga (Rp)"].values[0]
     total_harga = harga_makanan * jumlah_makanan
     st.write(f"Total harga yang akan anda bayar untuk {jumlah_makanan} {pilihan_makanan} adalah Rp {total_harga}")
 
 # fungsi buat pemesanan makanan
 def pemesanan_makanan():
-    st.title("Pemesanan Makanan")
+    st.title("🛒Pemesanan Makanan🛒P")
 
-    nama_pembeli = st.text_input("Nama Pembeli")
-    no_telepon = st.text_input("Nomor Telepon")
+    nama_pembeli = st.text_input("🧑 Nama Pembeli")
+    no_telepon = st.text_input("📞 Nomor Telepon")
 
     if "pesanan_makanan" not in st.session_state:
         st.session_state.pesanan_makanan = []
 
     st.write("### Pilih Menu Makanan")
-    pilihan_makanan = st.multiselect("Pilih Makanan", menu_makanan_df["Nama Makanan"].tolist())
-    jumlah_makanan = st.number_input("Jumlah Pesanan", min_value=1, step=1)
+    pilihan_makanan = st.multiselect("🍔 Pilih Makanan", menu_makanan_df["Nama Makanan"].tolist())
+    jumlah_makanan = st.number_input("📋 Jumlah Pesanan", min_value=1, step=1)
 
     if st.button("Tambahkan ke Pesanan"):
         if not nama_pembeli or not no_telepon or not pilihan_makanan:
@@ -227,7 +232,9 @@ def pemesanan_makanan():
                     "Harga Satuan": harga_makanan,
                     "Total": jumlah_makanan * harga_makanan
                 })
-            st.success("Pesanan berhasil ditambahkan!")
+            st.success(f"🎉 Terima kasih! Pesanan Anda telah kami terima.")
+            st.write("### 📜 Daftar Pesanan Anda")
+            
 
     st.write(" Daftar Pesanan Makanan")
     if st.session_state.pesanan_makanan:
@@ -260,20 +267,20 @@ def pemesanan_makanan():
 
 # menu navigasi untuk memilih aplikasi
 menu = st.sidebar.selectbox(
-    "Pilih Menu Aplikasi",
-    ["Menu Utama", "Menu Minuman", "Pemesanan Minuman", "Menu Makanan", "Pemesanan Makanan"]
+    "Pilih Menu Aplikasi", 
+    ["Menu Utama 🍴", "Menu Minuman 🍹", "Pemesanan Minuman 🛒", "Menu Makanan 🍲", "Pemesanan Makanan 🛒"]
 )
 
 # menentukan aplikasi yang dipilih
-if menu == "Menu Utama":
+if menu == "Menu Utama 🍴":
     menu_utama()
-elif menu == "Menu Minuman":
+elif menu == "Menu Minuman 🍹":
     menu_minuman()
-elif menu == "Pemesanan Minuman":
+elif menu == "Pemesanan Minuman 🛒":
     pemesanan_minuman()
-elif menu == "Menu Makanan":
+elif menu == "Menu Makanan 🍲":
     menu_makanan()
-elif menu == "Pemesanan Makanan":
+elif menu == "Pemesanan Makanan 🛒":
     pemesanan_makanan()
     
 st.markdown(
@@ -298,4 +305,4 @@ st.markdown(
     """,
     unsafe_allow_html= True
     
-)
+)   
